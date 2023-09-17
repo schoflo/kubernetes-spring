@@ -6,7 +6,7 @@ RUN mvn package
 
 
 FROM eclipse-temurin:17-jdk-alpine
-MAINTAINER schoflo
+MAINTAINER flo
 EXPOSE 8080
 
 COPY --from=0 "/tmp" kubernetes-spring-0.0.1.jar
