@@ -9,5 +9,4 @@ MAINTAINER schoflo
 EXPOSE 8080
 
 COPY --from=0 "/tmp/" kubernetes-spring-0.0.1.jar
-RUN ls -la ./
-ENTRYPOINT ./kubernetes-spring
+ENTRYPOINT ./kubernetes-spring-0.0.1.jar
