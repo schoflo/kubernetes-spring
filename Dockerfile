@@ -11,5 +11,5 @@ EXPOSE 8080
 
 RUN ls -la
 RUN ls -la /tmp/
-CMD java -jar /data/kubernetes-spring-0.0.1.jar
-COPY --from=maven_build /tmp/target/kubernetes-spring-0.0.1.jar /data/kubernetes-spring-0.0.1.jar
+#CMD java -jar /data/kubernetes-spring-0.0.1.jar
+#COPY --from=maven_build /tmp/target/kubernetes-spring-0.0.1.jar /data/kubernetes-spring-0.0.1.jar
