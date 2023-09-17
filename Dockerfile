@@ -5,7 +5,7 @@ WORKDIR /tmp/
 RUN mvn package
 
 
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:11
 MAINTAINER schoflo
 EXPOSE 8080
 
