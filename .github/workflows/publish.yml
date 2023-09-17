@@ -9,10 +9,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build the kubernetes-spring Docker image
         run: |
-          echo $CR_PAT | docker login ghcr.io -u flo.scholz@gmx.net --password-stdin
-          podman build . --tag ghcr.io/schoflo/kubernetes-spring:latest
-          podman push ghcr.io/schoflo/kubernetes-spring:latest
-        env:
-          CR_PAT: ${{ secrets.CR_PAT }}
+          docker build . --tag ghcr.io/schoflo/kubernetes-spring:latest
+          docker run ghcr.io/schoflo/kubernetes-spring:latest
+          docker push ghcr.io/schoflo/kubernetes-spring:latest
