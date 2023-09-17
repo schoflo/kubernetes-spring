@@ -1,4 +1,4 @@
-FROM maven:3.11.0-openjdk-17 AS maven_build
+FROM mmaven:3.8.5-openjdk-17 AS maven_build
 COPY pom.xml /tmp/
 COPY src /tmp/src/
 WORKDIR /tmp/
