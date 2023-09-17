@@ -12,6 +12,7 @@ jobs:
       - name: Build the kubernetes-spring Docker image
         run: |
           echo $CR_PAT | docker login ghcr.io -u flo.scholz@gmx.net --password-stdin
-          echo Login hat funktioniert?
+          docker build . --tag ghcr.io/schoflo/kubernetes-spring:latest
+          docker push ghcr.io/schoflo/kubernetes-spring
         env:
           CR_PAT: ${{ secrets.CR_PAT }}
