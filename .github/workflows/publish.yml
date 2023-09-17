@@ -13,6 +13,6 @@ jobs:
         run: |
           echo $CR_PAT | docker login ghcr.io -u flo.scholz@gmx.net --password-stdin
           podman build . --tag ghcr.io/schoflo/kubernetes-spring:latest
-          podman push ghcr.io/schoflo/kubernetes-spring
+          podman push ghcr.io/schoflo/kubernetes-spring:latest
         env:
           CR_PAT: ${{ secrets.CR_PAT }}
