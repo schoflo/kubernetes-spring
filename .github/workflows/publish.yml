@@ -18,6 +18,6 @@ jobs:
 
       - name: Build the kubernetes-spring Docker image
         run: |
-          docker build . --tag ghcr.io/schoflo/kubernetes-spring:latest
-          docker run ghcr.io/schoflo/kubernetes-spring:latest
-          docker push ghcr.io/schoflo/kubernetes-spring:latest
+               docker build . --tag ghcr.io/schoflo/kubernetes-spring:latest
+          #          docker run ghcr.io/schoflo/kubernetes-spring:latest
+               docker push ghcr.io/schoflo/kubernetes-spring:latest
