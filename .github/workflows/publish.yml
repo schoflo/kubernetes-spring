@@ -1,10 +1,9 @@
 name: kubernetes-spring-publish
 
 on: [ push ]
-# Kommentar
 jobs:
   publish-kubernetes-spring-image:
-    runs-on: [ debian-latest, ubuntu-latest ]
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v3
