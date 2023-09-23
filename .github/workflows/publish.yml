@@ -3,8 +3,8 @@ name: kubernetes-spring-publish
 on: [ push ]
 
 jobs:
-  #  publish-kubernetes-spring-image:
-  #    runs-on: [ debian-latest, ubuntu-latest ]
+  publish-kubernetes-spring-image:
+    runs-on: [ debian-latest, ubuntu-latest ]
 
   steps:
     - uses: actions/checkout@v3
