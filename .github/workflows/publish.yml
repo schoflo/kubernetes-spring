@@ -1,7 +1,7 @@
 name: kubernetes-spring-publish
 
 on: [ push ]
-
+# Kommentar
 jobs:
   publish-kubernetes-spring-image:
     runs-on: [ debian-latest, ubuntu-latest ]
