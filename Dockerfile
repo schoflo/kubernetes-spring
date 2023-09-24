@@ -1,4 +1,4 @@
-FROM docker.io/arm64v8/maven:3.9.4-ecplise-temurin-17 AS maven_build
+FROM arm64v8/maven:3.9.4-eclipse-temurin-17 AS maven_build
 COPY pom.xml /tmp/
 COPY src /tmp/src/
 WORKDIR /tmp/
