@@ -9,6 +9,6 @@ FROM eclipse-temurin:17-jdk-alpine
 LABEL author=schoflo
 EXPOSE 8080
 
-COPY --from=0 "/tmp/target/app.jar" app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+COPY --from=0 "/tmp/target/kubernetes-spring.jar" app.jar
+ENTRYPOINT ["java","-jar","/kubernetes-spring.jar"]
 
