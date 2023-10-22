@@ -1,16 +1,16 @@
 spring:
   security:
     oauth2:
-      client:
-        registration:
-          keycloak:
-            client-id: login-app
-            authorization-grant-type: authorization_code
-            scope: openid
-        provider:
-          keycloak:
-            issuer-uri: https://keycloak.192.168.49.2.nip.io/realms/kubernetes-spring
-            user-name-attribute: preferred_username
       resourceserver:
         jwt:
           issuer-uri: https://keycloak.192.168.49.2.nip.io/realms/kubernetes-spring
+          jwk-set-uri: https://keycloak.192.168.49.2.nip.io/realms/kubernetes-spring/protocol/openid-connect/certs
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+server:
+  port: 8080
