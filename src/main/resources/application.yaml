@@ -3,8 +3,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://keycloak.192.168.49.2.nip.io/realms/kubernetes-spring
-          jwk-set-uri: https://keycloak.192.168.49.2.nip.io/realms/kubernetes-spring/protocol/openid-connect/certs
+          issuer-uri: http://192.168.49.2:31577/realms/kubernetes-spring
+          jwk-set-uri: http://192.168.49.2:31577/realms/kubernetes-spring/protocol/openid-connect/certs
 
 logging:
   level:
