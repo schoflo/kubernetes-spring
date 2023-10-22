@@ -6,7 +6,7 @@ RUN mvn package
 
 
 FROM eclipse-temurin:17-jdk-alpine
-MAINTAINER schoflo
+LABEL author=schoflo
 EXPOSE 8080
 
 COPY --from=0 "/tmp/target/app.jar" app.jar
