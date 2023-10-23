@@ -5,6 +5,16 @@ spring:
         jwt:
           issuer-uri: http://192.168.49.2:31577/realms/kubernetes-spring
           jwk-set-uri: http://192.168.49.2:31577/realms/kubernetes-spring/protocol/openid-connect/certs
+  datasource:
+    url: jdbc:mysql://${DB_SERVER}:${DB_PORT:3306}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
 
 logging:
   level:
@@ -14,3 +24,4 @@ logging:
 
 server:
   port: 8080
+
