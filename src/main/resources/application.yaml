@@ -15,6 +15,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+#  h2:
+#    console:
+#      enabled: true
 
 logging:
   level:
