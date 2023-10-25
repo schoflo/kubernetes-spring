@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class BeerController {
 
@@ -25,6 +27,11 @@ public class BeerController {
     @PostMapping("/createBeer")
     public Beer createBeer(@RequestParam(name = "name", required = false, defaultValue = "Siegel") String name) {
         return beerRepo.save(new Beer(name, "Union", 4.9));
+    }
+
+    @GetMapping("/getBeers")
+    public List<Beer> getBeers() {
+        return beerRepo.findAll();
     }
 
 }
