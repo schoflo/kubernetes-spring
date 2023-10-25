@@ -3,6 +3,6 @@ WORKDIR /opt
 ENV PORT 8080
 EXPOSE 8080
 COPY target/*.jar /opt/kubernetes-spring.jar
-ENTRYPOINT exec java "$JAVA_OPTS" -jar kubernetes-spring.jar
+ENTRYPOINT ["java","-jar","/kubernetes-spring.jar"]
 
 
