@@ -18,6 +18,11 @@ public class BoardgameController {
         return boardgameRepo.save(Boardgame.builder().name(name).publisher("Shiro Games").price(59.99).build());
     }
 
+    /**
+     * Gibt eine Liste aller gespeicherten Brettspiele zurück
+     *
+     * @return Liste von {@link Boardgame}
+     */
     public List<Boardgame> getBoardgames() {
         return boardgameRepo.findAll();
     }
