@@ -1,7 +1,10 @@
 package com.schoflo.kubernetesspring.entity;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +29,5 @@ public class Boardgame {
     private double rating;
     private LocalDate releasedate;
     @Lob
-    @Column
     private byte[] image;
 }

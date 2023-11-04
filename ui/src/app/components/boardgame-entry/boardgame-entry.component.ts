@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Boardgame, BoardgameFacadeService} from "../../../../openapi";
 
 @Component({
   selector: 'app-boardgame-entry',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./boardgame-entry.component.scss']
 })
 export class BoardgameEntryComponent {
+
+  constructor(private boardgameFacadeService: BoardgameFacadeService) {
+  }
+
+  createBoardgame(): void {
+    this.boardgameFacadeService.createBoardgame("Northgard").subscribe((game: Boardgame) => {
+      console.log(game);
+    });
+  }
 
 }
