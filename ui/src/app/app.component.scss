@@ -1,0 +1,27 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sideNavContainer {
+  flex-basis: 100%;
+}
+
+.drawer {
+  padding: 20px 15px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-btn {
+  margin-left: 10px;
+  font-size: 1.1em;
+  letter-spacing: normal;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

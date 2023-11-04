@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @Builder
@@ -21,6 +23,8 @@ public class Boardgame {
     private String publisher;
     private String description;
     private double price;
+    private double rating;
+    private LocalDate releasedate;
     @Lob
     @Column
     private byte[] image;

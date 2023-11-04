@@ -3,5 +3,6 @@ export interface Boardgame {
   name: string;
   publisher: string;
   price: number;
+  rating: number;
   image: Blob;
 }

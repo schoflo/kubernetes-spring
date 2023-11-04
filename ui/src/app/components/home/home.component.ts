@@ -1,25 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {BoardgameService} from "../../service/boardgameService/boardgame.service";
-import {Boardgame} from "../../entity/Boardgame";
+import {Component} from '@angular/core';
+import {URL_BOARDGAMES, URL_HOME} from "../../util/constants/Url";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  boardgames: Boardgame[] = [];
-
-  constructor(private boardgameService: BoardgameService) {
-  }
-
-  ngOnInit(): void {
-    this.boardgameService.findAll().subscribe(boardgames => {
-      this.boardgames = boardgames;
-      console.log(this.boardgames);
-    });
-  }
-
-
+  protected readonly URL_BOARDGAMES = URL_BOARDGAMES;
+  protected readonly URL_HOME = URL_HOME;
 }

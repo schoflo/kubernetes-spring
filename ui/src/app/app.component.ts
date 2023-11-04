@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {URL_BOARDGAMES, URL_HOME} from "./util/constants/Url";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ui';
+  title = 'schoflo';
+  protected readonly URL_HOME = URL_HOME;
+  protected readonly URL_BOARDGAMES = URL_BOARDGAMES;
 }

@@ -1,0 +1,29 @@
+
+mat-card {
+  height: 120px;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+mat-icon {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  box-shadow: 0 0 11px rgb(255, 255, 255);
+}
+
