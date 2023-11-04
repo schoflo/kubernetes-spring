@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {URL_BOARDGAMES, URL_HOME} from "../../util/constants/Url";
+import {URL_BOARDGAMES, URL_HOME} from "../../util/constants/UrlConstants";
 
 @Component({
   selector: 'app-home',
