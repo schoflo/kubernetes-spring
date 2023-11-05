@@ -1,21 +1,30 @@
 package com.schoflo.kubernetesspring.controller;
 
 import com.schoflo.kubernetesspring.entity.Boardgame;
+import com.schoflo.kubernetesspring.mapper.BoardgameMapper;
+import com.schoflo.kubernetesspring.model.BoardgameModel;
 import com.schoflo.kubernetesspring.repository.BoardgameRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(origins= "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class BoardgameController {
 
-    @Autowired
-    private BoardgameRepository boardgameRepo;
+    // Field Injection not recommended (https://www.baeldung.com/java-spring-field-injection-cons)
+    private final BoardgameRepository boardgameRepo;
+    private final BoardgameMapper boardgameMapper;
 
-    public Boardgame createBoardgame(String name) {
-        return boardgameRepo.save(Boardgame.builder().name(name).publisher("Shiro Games").price(59.99).build());
+    public BoardgameController(BoardgameRepository boardgameRepo, BoardgameMapper boardgameMapper) {
+        this.boardgameRepo = boardgameRepo;
+        this.boardgameMapper = boardgameMapper;
+    }
+
+    public BoardgameModel createBoardgame(BoardgameModel boardgameModel) {
+        Boardgame boardgame = boardgameRepo.save(boardgameMapper.toEntity(boardgameModel));
+        return boardgameMapper.toDto(boardgame);
     }
 
     /**
@@ -23,8 +32,11 @@ public class BoardgameController {
      *
      * @return Liste von {@link Boardgame}
      */
-    public List<Boardgame> getBoardgames() {
-        return boardgameRepo.findAll();
+    public List<BoardgameModel> getBoardgames() {
+        List<Boardgame> boardgames = boardgameRepo.findAll();
+        return boardgames.stream()
+                .map(boardgameMapper::toDto)
+                .toList();
     }
 
 }

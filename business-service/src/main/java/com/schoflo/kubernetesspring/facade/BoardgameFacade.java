@@ -1,7 +1,7 @@
 package com.schoflo.kubernetesspring.facade;
 
 import com.schoflo.kubernetesspring.controller.BoardgameController;
-import com.schoflo.kubernetesspring.entity.Boardgame;
+import com.schoflo.kubernetesspring.model.BoardgameModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +27,12 @@ public class BoardgameFacade {
     }
 
     @PostMapping(path = "/createBoardgame", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boardgame createBoardgame(@RequestParam(name = "name", required = false, defaultValue = "Northgard") String name) {
-        return boardgameController.createBoardgame(name);
+    public BoardgameModel createBoardgame(@RequestBody BoardgameModel boardgameModel) {
+        return boardgameController.createBoardgame(boardgameModel);
     }
 
     @GetMapping(path = "/getBoardgames", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Boardgame> getBoardgames() {
+    public List<BoardgameModel> getBoardgames() {
         return boardgameController.getBoardgames();
     }
 }

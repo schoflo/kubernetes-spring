@@ -41,7 +41,7 @@
       <button mat-raised-button color="warn">
         Reset
       </button>
-      <button mat-raised-button color="primary" (click)="createBoardgame()">
+      <button mat-raised-button color="primary" (click)="createBoardgame()" [disabled]="form.invalid">
         Erstellen
       </button>
     </div>
