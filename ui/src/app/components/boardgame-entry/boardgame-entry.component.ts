@@ -35,8 +35,17 @@ export class BoardgameEntryComponent {
       description: this.form.get('description').value,
       price: this.form.get('price').value,
       rating: this.form.get('rating').value,
-      releasedate: this.form.get('releasedate').value.toISOString(),
+      releasedate: this.form.get('releasedate').value?.toISOString(),
     };
   }
 
+  test() {
+    this.boardgameFacadeService.getBoardgame(1).subscribe({
+      next: (x: any) => {
+        console.log(x);
+      }, error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 }

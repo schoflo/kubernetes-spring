@@ -1,6 +1,7 @@
 package com.schoflo.kubernetesspring.controller;
 
 import com.schoflo.kubernetesspring.entity.Boardgame;
+import com.schoflo.kubernetesspring.exception.BoardgameNotFoundException;
 import com.schoflo.kubernetesspring.mapper.BoardgameMapper;
 import com.schoflo.kubernetesspring.model.BoardgameModel;
 import com.schoflo.kubernetesspring.repository.BoardgameRepository;
@@ -37,6 +38,19 @@ public class BoardgameController {
         return boardgames.stream()
                 .map(boardgameMapper::toDto)
                 .toList();
+    }
+
+    /**
+     * Gibt ein Brettspiel zurück
+     *
+     * @param id ID des Brettspiels
+     * @return {@link Boardgame}
+     * @throws BoardgameNotFoundException Wird geworfen wenn kein Brettspiel gefunden wurde.
+     */
+    public BoardgameModel getBoardgame(long id) throws BoardgameNotFoundException {
+        return boardgameMapper.toDto(boardgameRepo.findById(id)
+                .orElseThrow(() -> new BoardgameNotFoundException("Es wurde kein Brettspiel mit der ID " +
+                        id + " gefunden")));
     }
 
 }

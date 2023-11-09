@@ -36,7 +36,9 @@ logging:
   level:
     org:
       springframework:
-        security: DEBUG
+        web: DEBUG
+  pattern:
+    dateformat: "yyyy-MM-dd HH:mm:ss.SSS"
 # *******************************
 
 server:
