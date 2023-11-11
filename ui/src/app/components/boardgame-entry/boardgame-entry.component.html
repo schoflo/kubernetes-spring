@@ -1,50 +1,43 @@
 <form [formGroup]="form">
   <div class="maincontainer">
-    <h1>Erstelle ein Brettspiel</h1>
-    <div class="row">
-      <mat-form-field class="item">
-        <mat-label>Name des Brettspiels</mat-label>
-        <input matInput formControlName="name">
-      </mat-form-field>
-      <mat-form-field class="item">
-        <mat-label>Name des Publishers</mat-label>
-        <input matInput formControlName="publisher">
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <mat-form-field class="item">
-        <mat-label>Preis</mat-label>
-        <input matInput type="number" step="0.01" min="0" formControlName="price">
-        <mat-icon matIconSuffix>euro_symbol</mat-icon>
-      </mat-form-field>
-      <mat-form-field class="item">
-        <mat-label>Bewertung</mat-label>
-        <input matInput type="number" step="0.1" min="0" max="10" formControlName="rating">
-        <mat-icon matIconSuffix>trending_up</mat-icon>
-        <mat-hint>Bewertung auf eine Skala von 0 bis 10</mat-hint>
-      </mat-form-field>
-      <mat-form-field class="item">
-        <mat-label>Erscheinungsdatum</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="releasedate">
-        <mat-hint>z.B. 01.01.2000</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <mat-form-field class="item">
-        <mat-label>Beschreibung</mat-label>
-        <textarea matInput rows="5" formControlName="description"></textarea>
-      </mat-form-field>
-    </div>
-    <div class="btnRow">
-      <button mat-raised-button color="warn">
-        Reset
-      </button>
-      <button mat-raised-button color="primary" (click)="createBoardgame()" [disabled]="form.invalid">
-        Erstellen
-      </button>
-    </div>
+    <h1 class="grid-item-header">Erstelle ein Brettspiel</h1>
+    <mat-form-field class="grid-item-name">
+      <mat-label>Name des Brettspiels</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="grid-item-publisher">
+      <mat-label>Name des Publishers</mat-label>
+      <input matInput formControlName="publisher">
+    </mat-form-field>
+    <mat-form-field class="grid-item-price">
+      <mat-label>Preis</mat-label>
+      <input matInput type="number" step="0.01" min="0" formControlName="price">
+      <mat-icon matIconSuffix>euro_symbol</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="grid-item-rating">
+      <mat-label>Bewertung</mat-label>
+      <input matInput type="number" step="0.1" min="0" max="10" formControlName="rating">
+      <mat-icon matIconSuffix>trending_up</mat-icon>
+      <mat-hint>Bewertung auf eine Skala von 0 bis 10</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="grid-item-releasedate">
+      <mat-label>Erscheinungsdatum</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="releasedate">
+      <mat-hint>z.B. 01.01.2000</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="grid-item-description">
+      <mat-label>Beschreibung</mat-label>
+      <textarea matInput rows="5" formControlName="description"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="createBoardgame()" [disabled]="form.invalid"
+            class="grid-item-save-btn">
+      Erstellen
+    </button>
+    <button mat-raised-button color="warn" (click)="test()" class="grid-item-reset-btn">
+      Reset
+    </button>
   </div>
 </form>
 

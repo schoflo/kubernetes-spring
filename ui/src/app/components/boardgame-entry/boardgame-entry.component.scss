@@ -1,35 +1,85 @@
-
 .maincontainer {
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  width: 66%;
+  padding: 20px 10px 10px;
+  display: grid;
   margin: auto;
-  align-items: center;
-  gap: 20px;
-}
-
-.row {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  grid-template-areas:
+    'header'
+    'name'
+    'publisher'
+    'price'
+    'rating'
+    'releasedate'
+    'description'
+    'save-btn'
+    'reset-btn';
   gap: 10px;
 }
 
-.item {
-  flex-basis: 100%;
+@media(min-width: 50em) {
+  .maincontainer {
+    width: 66%;
+    grid-template-areas:
+    'header header'
+    'name publisher'
+    'price rating'
+    'releasedate releasedate'
+    'description description'
+    'save-btn reset-btn';
+  }
 }
 
-.btnRow {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: -20px;
+@media(min-width: 90em) {
+  .maincontainer {
+    width: 66%;
+    grid-template-areas:
+    'header header header header header header'
+    'name name name publisher publisher publisher'
+    'price price rating rating releasedate releasedate'
+    'description description description description description description'
+    '. . . . save-btn reset-btn';
+  }
+  .grid-item-name {
+    grid-column: span 1.5;
+  }
+
+  .grid-item-publisher {
+    grid-column: span 1.5;
+  }
 }
 
-.spacer {
-  flex: 1 1 auto;
+.grid-item-header {
+  justify-self: center;
+  grid-area: header;
+}
+
+.grid-item-name {
+  grid-area: name;
+}
+
+.grid-item-publisher {
+  grid-area: publisher;
+}
+
+.grid-item-price {
+  grid-area: price;
+}
+
+.grid-item-rating {
+  grid-area: rating;
+}
+
+.grid-item-releasedate {
+  grid-area: releasedate;
+}
+
+.grid-item-description {
+  grid-area: description;
+}
+
+.grid-item-reset-btn {
+  grid-area: reset-btn;
+}
+
+.grid-item-save-btn {
+  grid-area: save-btn;
 }
