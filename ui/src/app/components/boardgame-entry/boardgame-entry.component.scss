@@ -10,6 +10,7 @@
     'rating'
     'releasedate'
     'description'
+    'image'
     'save-btn'
     'reset-btn';
   gap: 10px;
@@ -24,6 +25,7 @@
     'price rating'
     'releasedate releasedate'
     'description description'
+    'image image'
     'save-btn reset-btn';
   }
 }
@@ -36,6 +38,7 @@
     'name name name publisher publisher publisher'
     'price price rating rating releasedate releasedate'
     'description description description description description description'
+    'image image image image image image'
     '. . . . save-btn reset-btn';
   }
   .grid-item-name {
@@ -82,4 +85,8 @@
 
 .grid-item-save-btn {
   grid-area: save-btn;
+}
+
+.grid-item-image {
+  grid-area: image;
 }

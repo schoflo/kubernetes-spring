@@ -21,7 +21,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated());
+                        .anyRequest().permitAll());
 
         http
                 .oauth2ResourceServer(oauth2 -> oauth2
@@ -30,6 +30,10 @@ public class SecurityConfig {
         http
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(STATELESS));
+
+        http.headers(headers -> headers
+                .frameOptions(Customizer.withDefaults())
+                .disable());
 
         return http.build();
     }

@@ -1,12 +1,15 @@
 package com.schoflo.kubernetesspring.controller;
 
 import com.schoflo.kubernetesspring.entity.Boardgame;
+import com.schoflo.kubernetesspring.entity.BoardgameImage;
+import com.schoflo.kubernetesspring.exception.BoardgameImageCreationException;
 import com.schoflo.kubernetesspring.exception.BoardgameNotFoundException;
 import com.schoflo.kubernetesspring.mapper.BoardgameMapper;
 import com.schoflo.kubernetesspring.model.BoardgameModel;
 import com.schoflo.kubernetesspring.repository.BoardgameRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,9 +26,20 @@ public class BoardgameController {
         this.boardgameMapper = boardgameMapper;
     }
 
-    public BoardgameModel createBoardgame(BoardgameModel boardgameModel) {
-        Boardgame boardgame = boardgameRepo.save(boardgameMapper.toEntity(boardgameModel));
-        return boardgameMapper.toDto(boardgame);
+    public BoardgameModel createBoardgame(BoardgameModel boardgameModel, MultipartFile multipartFile) {
+        Boardgame boardgame = boardgameMapper.toEntity(boardgameModel);
+
+        BoardgameImage image;
+        try {
+            image = BoardgameImage.builder().fileName(multipartFile.getOriginalFilename())
+                    .file(multipartFile.getBytes()).build();
+        } catch (Exception e) {
+            throw new BoardgameImageCreationException("Beim Speichern bes Bildes zum " +
+                    "Brettspiel ist ein Fehler aufgetreten.");
+        }
+        boardgame.setBoardgameImage(image);
+
+        return boardgameMapper.toDto(boardgameRepo.save(boardgame));
     }
 
     /**

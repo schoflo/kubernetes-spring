@@ -20,6 +20,7 @@ import {TileComponent} from './components/custom/tile/tile.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import {FileUploadComponent} from './components/custom/file-upload/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
     BoardgameEntryComponent,
     HomeComponent,
     TileComponent,
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,7 @@ class BoardgameControllerTest {
 
         //*** GIVEN ***
         long expectedId = 1;
-        Optional<Boardgame> boardgameOptional = Optional.of(Boardgame.builder().id(1).build());
+        Optional<Boardgame> boardgameOptional = Optional.of(Boardgame.builder().id(1L).build());
         Mockito.when(mockedBoardgameRepo.findById(1L)).thenReturn(boardgameOptional);
 
         //*** WHEN ****

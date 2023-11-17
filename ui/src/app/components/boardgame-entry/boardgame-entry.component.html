@@ -31,6 +31,7 @@
       <mat-label>Beschreibung</mat-label>
       <textarea matInput rows="5" formControlName="description"></textarea>
     </mat-form-field>
+    <app-file-upload class="grid-item-image" formControlName="image"></app-file-upload>
     <button mat-raised-button color="primary" (click)="createBoardgame()" [disabled]="form.invalid"
             class="grid-item-save-btn">
       Erstellen
@@ -40,4 +41,5 @@
     </button>
   </div>
 </form>
+<img src="{{'data:image/jpg;base64,' + imagePath}}" alt="Picture">
 

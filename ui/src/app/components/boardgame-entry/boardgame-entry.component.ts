@@ -9,27 +9,35 @@ import {FormBuilder, FormControl, Validators} from "@angular/forms";
 })
 export class BoardgameEntryComponent {
 
+  imagePath: string = null;
+
+
   form = new FormBuilder().group({
     name: ['', {validators: [Validators.required]}],
     publisher: ['', {validators: [Validators.required]}],
     description: [''],
     price: new FormControl<number | null>(null),
     rating: new FormControl<number | null>(null),
-    releasedate: new FormControl<Date | null>(null)
-  })
+    releasedate: new FormControl<Date | null>(null),
+    image: new FormControl<Blob | null>(null)
+  });
 
   constructor(private boardgameFacadeService: BoardgameFacadeService) {
+    this.form.get('image').valueChanges.subscribe(change => {
+      console.log(change)
+    });
   }
 
   createBoardgame(): void {
-    this.boardgameFacadeService.createBoardgame(this.createPayload()).subscribe((game: BoardgameModel) => {
+    this.boardgameFacadeService.createBoardgame(this.createPayload(), this.form.get('image').value).subscribe((game: BoardgameModel) => {
       console.log(game);
+      this.imagePath = game.boardgameImage.file;
     });
-    console.log(this.form)
   }
 
   createPayload(): BoardgameModel {
     return {
+      id: null,
       name: this.form.get('name')!.value,
       publisher: this.form.get('publisher').value,
       description: this.form.get('description').value,

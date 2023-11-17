@@ -17,4 +17,11 @@ public class ExceptionHandlingController {
         log.debug(ex.getMessage(), ex);
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(BoardgameImageCreationException.class)
+    public ResponseEntity<ErrorMessage> boardgameImageCreationException(BoardgameImageCreationException ex) {
+        ErrorMessage message = new ErrorMessage(ex.getMessage());
+        log.debug(ex.getMessage(), ex);
+        return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

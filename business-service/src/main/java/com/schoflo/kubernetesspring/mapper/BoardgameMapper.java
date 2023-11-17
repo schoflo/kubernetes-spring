@@ -4,7 +4,8 @@ import com.schoflo.kubernetesspring.entity.Boardgame;
 import com.schoflo.kubernetesspring.model.BoardgameModel;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+        uses = BoardgameImageMapper.class)
 public interface BoardgameMapper {
 
     BoardgameModel toDto(Boardgame boardgame);

@@ -1,10 +1,7 @@
 package com.schoflo.kubernetesspring.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,13 +20,15 @@ public class Boardgame extends BaseEntity {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     private String publisher;
     private String description;
     private double price;
     private double rating;
     private LocalDate releasedate;
-    @Lob
-    private byte[] image;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "boardgame_id", foreignKey = @ForeignKey(name = "FK_BOARDGAME_boardgame_id_BOARDGAMEIMAGE_ID"))
+    private BoardgameImage boardgameImage;
+
 }
