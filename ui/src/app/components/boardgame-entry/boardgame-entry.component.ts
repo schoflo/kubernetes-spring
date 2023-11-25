@@ -24,7 +24,7 @@ export class BoardgameEntryComponent {
 
   constructor(private boardgameFacadeService: BoardgameFacadeService) {
     this.form.get('image').valueChanges.subscribe(change => {
-      console.log(change)
+      console.log(change);
     });
   }
 

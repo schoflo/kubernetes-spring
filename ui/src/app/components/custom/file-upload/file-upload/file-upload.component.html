@@ -1,5 +1,23 @@
-<div>
-  <span>Choose file</span>
-  <span>{{file ? file.name : 'or drag and drop file here' }}</span>
-  <input class="file-input" type="file">
+<div class="fileupload-container border">
+
+  <div class="description-container">
+    <input class="file-input" type="file" accept="image/*" #fileUpload>
+
+    <div class="file-upload">
+
+      <button mat-mini-fab color="primary"
+              (click)="fileUpload.click()">
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+    </div>
+    <span>Zum Hochladen der Datei hier ablegen oder den Button klicken.</span>
+  </div>
+  <div *ngIf="file" class="file-container border">
+    <mat-icon>image</mat-icon>
+    <span>{{file.name}}</span>
+    <span class="align-right">{{FileUtils.calculateFileSize(file.size)}}</span>
+    <button mat-mini-fab color="warn" (click)="deleteFile()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 </div>

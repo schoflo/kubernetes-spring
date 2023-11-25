@@ -1,5 +1,6 @@
 import {Component, ElementRef, HostListener} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {FileUtils} from "../../../../util/file/FileUtils";
 
 @Component({
   selector: 'app-file-upload',
@@ -17,6 +18,7 @@ export class FileUploadComponent implements ControlValueAccessor {
 
   file: File | null = null;
   onChange: Function;
+  protected readonly FileUtils = FileUtils;
 
   @HostListener('change', ['$event.target.files']) emitFiles(event: FileList) {
     const file = event?.item(0);
@@ -30,12 +32,10 @@ export class FileUploadComponent implements ControlValueAccessor {
   /**
    * Wird aufgerufen bei Initialisierung und bei patchValue/setValue
    * Da wir den Wert des Controls nicht darüber setzen wollen, wird hier nur null gesetzt.
-   * @param value Ist hier immer null
    */
-  writeValue(value: null) {
-    // clear file input
+  writeValue() {
+    this.file = null;
     this.host.nativeElement.value = '';
-    this.file = value;
   }
 
   /**
@@ -46,7 +46,19 @@ export class FileUploadComponent implements ControlValueAccessor {
     this.onChange = fn;
   }
 
+  /**
+   * Benötigen wir nicht, muss aber implementiert werden für das Interface
+   * @param fn
+   */
   registerOnTouched(fn: any): void {
-    throw new Error("not yet implemented");
+  }
+
+  /**
+   * Löscht den Datei und Dateiinhalt aus der HTML-Komponente
+   */
+  deleteFile(): void {
+    this.onChange(null);
+    this.file = null;
+    this.host.nativeElement.value = '';
   }
 }
