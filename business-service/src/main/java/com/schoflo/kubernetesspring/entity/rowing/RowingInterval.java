@@ -21,13 +21,13 @@ public class RowingInterval {
     @CreationTimestamp
     private Date createdAt;
 
-    @Column(name = "workout_time", nullable = false)
-    private Time workoutTime;
-
     @Column(name = "rest_time", nullable = false)
     private Time restTime;
 
     @Column(name = "repetitions", nullable = false)
     private Integer repetitions;
+
+    @Column(name = "single_distance", nullable = false)
+    private Integer singleDistance;
 
 }

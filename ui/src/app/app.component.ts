@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {URL_BOARDGAMES, URL_HOME} from "./util/constants/UrlConstants";
+import {ROUTING_URL} from "./util/constants/RoutingUrl";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,5 @@ import {URL_BOARDGAMES, URL_HOME} from "./util/constants/UrlConstants";
 })
 export class AppComponent {
   title = 'schoflo';
-  protected readonly URL_HOME = URL_HOME;
-  protected readonly URL_BOARDGAMES = URL_BOARDGAMES;
+  URL = ROUTING_URL;
 }

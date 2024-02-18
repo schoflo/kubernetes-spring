@@ -14,13 +14,17 @@
   <mat-sidenav-container class="sideNavContainer">
     <mat-drawer #drawer>
       <div class="drawer">
-        <button mat-button [routerLink]="URL_HOME" (click)="drawer.close()">
+        <button mat-button [routerLink]="URL.HOME" (click)="drawer.close()">
           <mat-icon>home</mat-icon>
           Startseite
         </button>
-        <button mat-button [routerLink]="URL_BOARDGAMES" (click)="drawer.close()">
+        <button mat-button [routerLink]="URL.BOARDGAMES" (click)="drawer.close()">
           <mat-icon>casino</mat-icon>
           Brettspiele erstellen
+        </button>
+        <button mat-button [routerLink]="URL.ROWING" (click)="drawer.close()">
+          <mat-icon>rowing</mat-icon>
+          Rudersession erstellen
         </button>
       </div>
     </mat-drawer>

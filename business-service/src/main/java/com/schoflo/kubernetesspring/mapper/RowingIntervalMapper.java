@@ -6,9 +6,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        componentModel = MappingConstants.ComponentModel.SPRING)
 public interface RowingIntervalMapper {
     RowingInterval toEntity(RowingIntervalModel rowingIntervalModel);
 
     RowingIntervalModel toDto(RowingInterval rowingInterval);
+
 }

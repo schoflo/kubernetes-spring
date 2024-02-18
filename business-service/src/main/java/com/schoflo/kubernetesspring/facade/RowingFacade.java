@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
+@RestController
 public class RowingFacade {
 
     private final RowingController rowingController;
@@ -25,12 +26,12 @@ public class RowingFacade {
     }
 
     @GetMapping(path = "/getRowingSessions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<RowingSessionModel>> getBoardgames() {
+    public ResponseEntity<List<RowingSessionModel>> getRowingSessions() {
         return new ResponseEntity<>(rowingController.getRowingSessions(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/getBoardgame/{id}", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<RowingSessionModel> getBoardgame(@PathVariable("id") long id) {
+    @GetMapping(path = "/getRowingSession/{id}", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<RowingSessionModel> getRowingSession(@PathVariable("id") long id) {
         return new ResponseEntity<>(rowingController.getRowingSession(id), HttpStatus.OK);
     }
 }

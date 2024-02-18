@@ -11,10 +11,11 @@ import java.sql.Time;
  */
 @Value
 public class RowingIntervalModel {
-    @NotNull
-    Time workoutTime;
+    Long id;
     @NotNull
     Time restTime;
     @NotNull
     Integer repetitions;
+    @NotNull
+    Integer singleDistance;
 }

@@ -21,6 +21,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {FileUploadComponent} from './components/custom/file-upload/file-upload/file-upload.component';
+import { RowingComponent } from './components/rowing/rowing.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {FileUploadComponent} from './components/custom/file-upload/file-upload/f
     HomeComponent,
     TileComponent,
     FileUploadComponent,
+    RowingComponent,
   ],
   imports: [
     BrowserModule,

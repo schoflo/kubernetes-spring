@@ -4,14 +4,17 @@ import com.schoflo.kubernetesspring.entity.BaseEntity;
 import com.schoflo.kubernetesspring.util.RowingMode;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.time.Duration;
 
 @Getter
 @Setter
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "rowing_session")
 public class RowingSession extends BaseEntity {
     @Id
@@ -27,7 +30,14 @@ public class RowingSession extends BaseEntity {
     @JoinColumn(name = "rowing_interval_id")
     private RowingInterval rowingInterval;
 
-    @OneToMany(mappedBy = "rowingSession", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private Set<RowingWorkout> rowingWorkouts = new LinkedHashSet<>();
+    @Column(name = "workout_time", nullable = false)
+    private Duration workoutTime;
+
+    @Column(name = "strokes", nullable = false)
+    private Integer strokes;
+
+    @Column(name = "distance", nullable = false)
+    private Integer distance;
+
 
 }
