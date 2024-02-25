@@ -1,0 +1,92 @@
+.maincontainer {
+  padding: 20px 10px 10px;
+  display: grid;
+  margin: auto;
+  grid-template-areas:
+    'header'
+    'name'
+    'publisher'
+    'price'
+    'rating'
+    'releasedate'
+    'description'
+    'image'
+    'save-btn'
+    'reset-btn';
+  gap: 10px;
+}
+
+@media(min-width: 50em) {
+  .maincontainer {
+    width: 66%;
+    grid-template-areas:
+    'header header'
+    'name publisher'
+    'price rating'
+    'releasedate releasedate'
+    'description description'
+    'image image'
+    'save-btn reset-btn';
+  }
+}
+
+@media(min-width: 90em) {
+  .maincontainer {
+    width: 66%;
+    grid-template-areas:
+    'header header header header header header'
+    'name name name publisher publisher publisher'
+    'price price rating rating releasedate releasedate'
+    'description description description description description description'
+    'image image image image image image'
+    '. . . . save-btn reset-btn';
+  }
+  .grid-item-name {
+    grid-column: span 1.5;
+  }
+
+  .grid-item-publisher {
+    grid-column: span 1.5;
+  }
+}
+
+.grid-item-header {
+  justify-self: center;
+  grid-area: header;
+}
+
+.grid-item-name {
+  grid-area: name;
+}
+
+.grid-item-publisher {
+  grid-area: publisher;
+}
+
+.grid-item-price {
+  grid-area: price;
+}
+
+.grid-item-rating {
+  grid-area: rating;
+}
+
+.grid-item-releasedate {
+  grid-area: releasedate;
+}
+
+.grid-item-description {
+  grid-area: description;
+}
+
+.grid-item-reset-btn {
+  grid-area: reset-btn;
+}
+
+.grid-item-save-btn {
+  grid-area: save-btn;
+}
+
+.grid-item-image {
+  grid-area: image;
+}

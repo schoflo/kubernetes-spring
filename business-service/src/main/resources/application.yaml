@@ -19,7 +19,7 @@ spring:
   jpa:
     database: postgresql
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
   datasource:
     url: jdbc:postgresql://localhost:5432/spring
     username: admin

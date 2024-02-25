@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {RowingFacadeService} from "../../../../openapi";
+import {FormBuilder, FormControl, Validators} from "@angular/forms";
+
 
 @Component({
   selector: 'app-rowing',
@@ -8,22 +10,29 @@ import {RowingFacadeService} from "../../../../openapi";
 })
 export class RowingComponent {
 
+  imagePath: string = undefined;
+
+  form = new FormBuilder().group({
+    name: ['', {validators: [Validators.required]}],
+    publisher: ['', {validators: [Validators.required]}],
+    description: [''],
+    price: new FormControl<number | null>(null),
+    rating: new FormControl<number | null>(null),
+    releasedate: new FormControl<Date | null>(null),
+    image: new FormControl<Blob | null>(null)
+  });
+
 
   constructor(private rowingFacadeService: RowingFacadeService) {
   }
 
   createRowingSession() {
-    this.rowingFacadeService.createRowingSession({
-      rowingMode: "DISTANCE",
-      rowingInterval: null,
-      workoutTime: 30 * 60000,
-      strokes: 1000,
-      distance: 5000
-    }).subscribe(result => {
-      console.log(result)
-    });
     this.rowingFacadeService.getRowingSessions().subscribe(result => {
       console.log(result);
     })
+  }
+
+  reset() {
+    console.error('Not yet implemented');
   }
 }

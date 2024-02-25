@@ -8,7 +8,7 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
         componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {RowingIntervalMapper.class, DurationMapper.class})
+        uses = {RowingIntervalMapper.class})
 public interface RowingSessionMapper {
     RowingSession toEntity(RowingSessionModel rowingSessionModel);
 

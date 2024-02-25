@@ -17,8 +17,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class BaseEntity {
 
+    /**
+     * Datum an dem der Datensatz erstellt wurde.
+     */
     @CreationTimestamp
     private Date createdAt;
+    /**
+     * Datum an dem der Datensatz das letzte mal geändert wurde.
+     */
     @UpdateTimestamp
     public Date lastUpdatedAt;
 }

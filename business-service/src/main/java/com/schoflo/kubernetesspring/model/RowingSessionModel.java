@@ -5,6 +5,8 @@ import com.schoflo.kubernetesspring.util.RowingMode;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
+import java.time.LocalDate;
+
 /**
  * DTO for {@link RowingSession}
  */
@@ -17,7 +19,10 @@ public class RowingSessionModel {
     @NotNull
     Long workoutTime;
     @NotNull
+    LocalDate workoutDate;
+    @NotNull
     Integer strokes;
     @NotNull
     Integer distance;
+    Integer calories;
 }
