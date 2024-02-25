@@ -29,8 +29,10 @@ spring:
 
 # **** OpenAPI-Schnittstelle ****
 springdoc:
-  api-docs.path: /openapi/api-docs
-  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs:
+    path: /openapi/api-docs
+  swagger-ui:
+    path: /openapi/swagger-ui.html
 # *******************************
 
 # ********** Logging ************

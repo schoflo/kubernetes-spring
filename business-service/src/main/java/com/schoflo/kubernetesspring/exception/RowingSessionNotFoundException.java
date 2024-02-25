@@ -1,7 +1,7 @@
 package com.schoflo.kubernetesspring.exception;
 
 /**
- * Diese Exception wird geworfen, wenn kein Brettspiel gefunden wurde.
+ * Diese Exception wird geworfen, wenn keine Rudereinheit gefunden wurde.
  */
 public class RowingSessionNotFoundException extends RuntimeException {
 

@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 public class ExceptionHandlingController {
 
-    @ExceptionHandler({BoardgameNotFoundException.class, RowingSessionNotFoundException.class})
+    @ExceptionHandler({BoardgameNotFoundException.class, RowingSessionNotFoundException.class,
+            RowingIntervalNotFoundException.class})
     public ResponseEntity<ErrorMessage> notFoundException(BoardgameNotFoundException ex) {
         ErrorMessage message = new ErrorMessage(ex.getMessage());
         log.debug(ex.getMessage(), ex);

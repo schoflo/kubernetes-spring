@@ -4,13 +4,13 @@
   margin: auto;
   grid-template-areas:
     'header'
-    'name'
-    'publisher'
-    'price'
-    'rating'
-    'releasedate'
-    'description'
-    'image'
+    'workoutDate'
+    'rowingMode'
+    'rowingInterval'
+    'workoutTime'
+    'strokes'
+    'distance'
+    'calories'
     'save-btn'
     'reset-btn';
   gap: 10px;
@@ -21,11 +21,7 @@
     width: 66%;
     grid-template-areas:
     'header header'
-    'name publisher'
-    'price rating'
-    'releasedate releasedate'
-    'description description'
-    'image image'
+    'workoutTime workoutTime'
     'save-btn reset-btn';
   }
 }
@@ -34,12 +30,10 @@
   .maincontainer {
     width: 66%;
     grid-template-areas:
-    'header header header header header header'
-    'name name name publisher publisher publisher'
-    'price price rating rating releasedate releasedate'
-    'description description description description description description'
-    'image image image image image image'
-    '. . . . save-btn reset-btn';
+    'header header header header header header header header header header header header'
+    'workoutDate workoutDate workoutDate workoutDate rowingMode rowingMode rowingMode rowingMode rowingInterval rowingInterval rowingInterval rowingInterval'
+    'workoutTime workoutTime workoutTime strokes strokes strokes distance distance distance calories calories calories'
+    '. . . . . . . . . .save-btn reset-btn';
   }
   .grid-item-name {
     grid-column: span 1.5;
@@ -59,24 +53,32 @@
   grid-area: name;
 }
 
-.grid-item-publisher {
-  grid-area: publisher;
+.grid-item-workoutDate {
+  grid-area: workoutDate;
 }
 
-.grid-item-price {
-  grid-area: price;
+.grid-item-rowingMode {
+  grid-area: rowingMode;
 }
 
-.grid-item-rating {
-  grid-area: rating;
+.grid-item-rowingInterval {
+  grid-area: rowingInterval;
 }
 
-.grid-item-releasedate {
-  grid-area: releasedate;
+.grid-item-workoutTime {
+  grid-area: workoutTime;
 }
 
-.grid-item-description {
-  grid-area: description;
+.grid-item-strokes {
+  grid-area: strokes;
+}
+
+.grid-item-distance {
+  grid-area: distance;
+}
+
+.grid-item-calories {
+  grid-area: calories;
 }
 
 .grid-item-reset-btn {
@@ -87,6 +89,4 @@
   grid-area: save-btn;
 }
 
-.grid-item-image {
-  grid-area: image;
-}
+

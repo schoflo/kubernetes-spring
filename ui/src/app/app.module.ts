@@ -23,6 +23,7 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {FileUploadComponent} from './components/custom/file-upload/file-upload/file-upload.component';
 import {RowingComponent} from './components/rowing/rowing.component';
 import {MatSelectModule} from "@angular/material/select";
+import {RowingIntervalPipe} from "./util/pipes/RowingIntervalPipe";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {MatSelectModule} from "@angular/material/select";
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    RowingIntervalPipe
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},

@@ -20,7 +20,7 @@ public class RowingFacade {
         this.rowingController = rowingController;
     }
 
-    @PostMapping(path = "/createRowingSession", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/createRowingSession", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RowingSessionModel> createRowingSession(@RequestBody RowingSessionModel rowingSessionModel) {
         return new ResponseEntity<>(rowingController.createRowingSession(rowingSessionModel), HttpStatus.OK);
     }
@@ -30,7 +30,7 @@ public class RowingFacade {
         return new ResponseEntity<>(rowingController.getRowingSessions(), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/getRowingSession/{id}", produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @GetMapping(path = "/getRowingSession/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RowingSessionModel> getRowingSession(@PathVariable("id") long id) {
         return new ResponseEntity<>(rowingController.getRowingSession(id), HttpStatus.OK);
     }
