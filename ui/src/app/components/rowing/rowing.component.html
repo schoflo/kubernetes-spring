@@ -11,7 +11,7 @@
 
     <mat-form-field class="grid-item-rowingMode">
       <mat-label>Rudermodus</mat-label>
-      <mat-select>
+      <mat-select formControlName="rowingMode" (selectionChange)="modeChanged($event)">
         @for (mode of rowingModes; track mode) {
           <mat-option [value]="mode">{{ mode | titlecase }}</mat-option>
         }
@@ -20,7 +20,7 @@
 
     <mat-form-field class="grid-item-rowingInterval">
       <mat-label>Ruderintervall (Optional)</mat-label>
-      <mat-select>
+      <mat-select formControlName="rowingInterval">
         @for (interval of (rowingIntervals$ | async); track interval) {
           <mat-option [value]="interval">{{ interval | intervalStringRepresentation }}</mat-option>
         }
@@ -63,3 +63,42 @@
   </div>
 </form>
 
+<div class="table-container">
+  <table mat-table [dataSource]="rowingSessions$ | async">
+    <caption hidden>Liste aller Rudereinheiten</caption>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Spalte Datuum des Workouts -->
+    <ng-container matColumnDef="workoutDate">
+      <th mat-header-cell *matHeaderCellDef> Datum des Workouts</th>
+      <td mat-cell *matCellDef="let element"> {{ element.workoutDate | date: "dd.MM.YYYY" }}</td>
+    </ng-container>
+
+    <!-- Spalte Rudermodus -->
+    <ng-container matColumnDef="rowingMode">
+      <th mat-header-cell *matHeaderCellDef> Rudermodus</th>
+      <td mat-cell *matCellDef="let element"> {{ element.rowingMode | titlecase }}</td>
+    </ng-container>
+
+    <!-- Spalte Ruderintervall -->
+    <ng-container matColumnDef="rowingInterval">
+      <th mat-header-cell *matHeaderCellDef> Ruderintervall</th>
+      <td mat-cell *matCellDef="let element"> {{ element.rowingInterval | intervalStringRepresentation }}</td>
+    </ng-container>
+
+    <!-- Spalte Dauer des Workouts -->
+    <ng-container matColumnDef="workoutTime">
+      <th mat-header-cell *matHeaderCellDef> Dauer des Workouts</th>
+      <td mat-cell *matCellDef="let element"> {{ element.workoutTime | workoutTimeStringRepresentation }}</td>
+    </ng-container>
+
+    <!-- Spalte Ruderschläge -->
+    <mat-text-column name="strokes"></mat-text-column>
+    <!-- Spalte Distanz -->
+    <mat-text-column name="distance"></mat-text-column>
+    <!-- Spalte Kalorien -->
+    <mat-text-column name="calories"></mat-text-column>
+  </table>
+</div>

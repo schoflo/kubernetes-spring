@@ -8,3 +8,10 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+/** Snackbars sollen immer unter dem Header angezeigt werden.*/
+.custom-snackbar {
+  margin-top: 5em !important;
+  text-align: center !important;
+}
+

@@ -24,6 +24,9 @@ import {FileUploadComponent} from './components/custom/file-upload/file-upload/f
 import {RowingComponent} from './components/rowing/rowing.component';
 import {MatSelectModule} from "@angular/material/select";
 import {RowingIntervalPipe} from "./util/pipes/RowingIntervalPipe";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatTableModule} from "@angular/material/table";
+import {WorkoutTimePipe} from "./util/pipes/WorkoutTimePipe";
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import {RowingIntervalPipe} from "./util/pipes/RowingIntervalPipe";
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    RowingIntervalPipe
+    MatSnackBarModule,
+    RowingIntervalPipe,
+    MatTableModule,
+    WorkoutTimePipe
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},

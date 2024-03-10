@@ -7,7 +7,10 @@ import {
   RowingSessionModel
 } from "../../../../openapi";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
+import {MatSelectChange} from "@angular/material/select";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatTableDataSource} from "@angular/material/table";
 import RowingModeEnum = RowingSessionModel.RowingModeEnum;
 
 
@@ -19,14 +22,19 @@ import RowingModeEnum = RowingSessionModel.RowingModeEnum;
 export class RowingComponent implements OnInit {
 
   rowingIntervals$: Observable<RowingIntervalModel[]> = null;
+  /** Wir brauchen die MatTableDataSource, damit Sortieren und Pagination korrekt funktionieren. */
+  rowingSessions$: Observable<MatTableDataSource<RowingSessionModel>> = null;
 
   rowingModes: string[] = Object.values(RowingModeEnum);
   timePattern = "^([0-9]{2}):([0-5][0-9]):([0-5][0-9])$";
 
+  displayedColumns = ['workoutDate', 'rowingMode', 'rowingInterval', 'workoutTime', 'strokes', 'distance', 'calories'];
+
+
   form = new FormBuilder().group({
     workoutDate: new FormControl<Date | null>(null, [Validators.required]),
     rowingMode: new FormControl<RowingModeEnum | null>(RowingModeEnum.Distance, [Validators.required]),
-    rowingInterval: new FormControl<RowingIntervalModel | null>(null),
+    rowingInterval: new FormControl<RowingIntervalModel | null>({value: null, disabled: true}),
     workoutTime: new FormControl<string | null>(null, [Validators.required]),
     strokes: new FormControl<number | null>(null, [Validators.required]),
     distance: new FormControl<number | null>(null, [Validators.required]),
@@ -35,7 +43,8 @@ export class RowingComponent implements OnInit {
 
 
   constructor(private rowingFacadeService: RowingFacadeService,
-              private rowingIntervalFacadeService: RowingIntervalFacadeService) {
+              private rowingIntervalFacadeService: RowingIntervalFacadeService,
+              private snackbar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -45,6 +54,13 @@ export class RowingComponent implements OnInit {
   createRowingSession() {
     this.rowingFacadeService.createRowingSession(this.createPayload()).subscribe((session: BoardgameModel) => {
       console.log(session);
+      this.snackbar.open('Die Rudereinheit wurde erfolgreich angelegt!', null,
+        {
+          duration: 3000,
+          horizontalPosition: "right",
+          verticalPosition: "top",
+          panelClass: 'custom-snackbar'
+        });
     });
   }
 
@@ -74,8 +90,22 @@ export class RowingComponent implements OnInit {
     return Number(str.substring(0, 2)) * 3600 + Number(str.substring(3, 5)) * 60 + Number(str.substring(6, 8));
   }
 
-  private initObservables() {
-    this.rowingIntervals$ = this.rowingIntervalFacadeService.getRowingIntervals();
+  protected readonly RowingModeEnum = RowingModeEnum;
+
+  modeChanged(change: MatSelectChange) {
+    const control = this.form.get('rowingInterval');
+    if (change.value === RowingModeEnum.Interval) {
+      control.enable();
+    } else {
+      control.disable();
+      control.reset();
+    }
   }
 
+  private initObservables() {
+    this.rowingIntervals$ = this.rowingIntervalFacadeService.getRowingIntervals();
+    this.rowingSessions$ = this.rowingFacadeService.getRowingSessions().pipe(map((rowingSessions: RowingSessionModel[]) => {
+      return new MatTableDataSource(rowingSessions)
+    }));
+  }
 }

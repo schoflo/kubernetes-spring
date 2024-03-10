@@ -1,7 +1,8 @@
 insert into rowing_interval (repetitions, single_distance, rest_time)
 values (4, 800, 120),
        (3, 2000, 240),
-       (7, 500, 120);
+       (7, 500, 120),
+    (4, 1500, 180);
 
 insert into rowing_session (workout_date, strokes, distance, workout_time, rowing_interval_id, calories, rowing_mode)
 values ('2024-01-02', 637, 7262, 1800000, null, 180, 'TIME'),
@@ -46,4 +47,8 @@ values ('2024-01-02', 637, 7262, 1800000, null, 180, 'TIME'),
         (SELECT id FROM rowing_interval WHERE repetitions = 7 and single_distance = 500 and rest_time = 120), 95,
         'INTERVAL'),
        ('2024-02-22', 684, 8000, 1996000, null, 168, 'DISTANCE'),
-       ('2024-02-23', 685, 8000, 1933000, null, 170, 'DISTANCE');
+       ('2024-02-23', 685, 8000, 1933000, null, 170, 'DISTANCE'),
+       ('2024-02-26', 737, 8500, 34 * 60 * 1000 + 45 * 1000, null, 181, 'DISTANCE'),
+       ('2024-02-27', 555, 6000, 23 * 60 * 1000 + 52 * 1000, (SELECT id FROM rowing_interval WHERE repetitions = 4 and single_distance = 1500 and rest_time = 180), 181, 'INTERVAL');
+       ('2024-02-29', 736, 8500, 32 * 60 * 1000 + 24 * 1000, null, 181, 'DISTANCE');
+       ('2024-03-01', 559, 6195, 25 * 60 * 1000, null, 181, 'TIME');

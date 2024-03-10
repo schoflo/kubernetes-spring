@@ -13,16 +13,18 @@
     'calories'
     'save-btn'
     'reset-btn';
-  gap: 10px;
+  gap: 20px;
 }
 
 @media(min-width: 50em) {
   .maincontainer {
     width: 66%;
     grid-template-areas:
-    'header header'
-    'workoutTime workoutTime'
-    'save-btn reset-btn';
+    'header header header header header header'
+    'workoutDate workoutDate workoutDate rowingMode rowingMode rowingMode'
+    'rowingInterval rowingInterval rowingInterval workoutTime workoutTime workoutTime'
+    'strokes strokes distance distance calories calories'
+    '. . . . save-btn reset-btn';
   }
 }
 
@@ -89,4 +91,8 @@
   grid-area: save-btn;
 }
 
-
+.table-container {
+  max-height: 500px;
+  overflow: auto;
+  padding-left: 10px;
+}

@@ -14,6 +14,9 @@ export class RowingIntervalPipe implements PipeTransform {
   STRING_SIZE = 9;
 
   transform(m: RowingIntervalModel): string {
+    if (!m) {
+      return '';
+    }
     const repAndDist = m.repetitions + 'x' + m.singleDistance;
     const time = new Date(1000 * m.restTime).toISOString().substring(15, 19);
     //TODO: Padding funktioniert nicht bei der Anzeige
