@@ -11,6 +11,7 @@ import {map, Observable} from "rxjs";
 import {MatSelectChange} from "@angular/material/select";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableDataSource} from "@angular/material/table";
+import {Chart} from "chart.js/auto";
 import RowingModeEnum = RowingSessionModel.RowingModeEnum;
 
 
@@ -29,6 +30,8 @@ export class RowingComponent implements OnInit {
   timePattern = "^([0-9]{2}):([0-5][0-9]):([0-5][0-9])$";
 
   displayedColumns = ['workoutDate', 'rowingMode', 'rowingInterval', 'workoutTime', 'strokes', 'distance', 'calories'];
+
+  public chart: Chart = null;
 
 
   form = new FormBuilder().group({
@@ -49,6 +52,8 @@ export class RowingComponent implements OnInit {
 
   ngOnInit(): void {
     this.initObservables();
+    this.createChart();
+    console.log(500 * (1800000 / 1000 / 7262));
   }
 
   createRowingSession() {
@@ -92,7 +97,7 @@ export class RowingComponent implements OnInit {
 
   protected readonly RowingModeEnum = RowingModeEnum;
 
-  modeChanged(change: MatSelectChange) {
+  protected modeChanged(change: MatSelectChange) {
     const control = this.form.get('rowingInterval');
     if (change.value === RowingModeEnum.Interval) {
       control.enable();
@@ -107,5 +112,24 @@ export class RowingComponent implements OnInit {
     this.rowingSessions$ = this.rowingFacadeService.getRowingSessions().pipe(map((rowingSessions: RowingSessionModel[]) => {
       return new MatTableDataSource(rowingSessions)
     }));
+  }
+
+  private createChart() {
+    this.rowingFacadeService.getRowingSessions().subscribe(rowingSessions => {
+      this.chart = new Chart('chart-canvas', {
+        type: 'line',
+        data: {
+          labels: rowingSessions.map(x => x.workoutDate),
+          datasets: [{
+            label: 'Pace',
+            data: rowingSessions.map(y => (500 * y.workoutTime / 1000 / y.distance)),
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1,
+            cubicInterpolationMode: 'monotone'
+          }]
+        }
+      });
+    });
   }
 }

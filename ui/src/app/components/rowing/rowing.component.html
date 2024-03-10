@@ -63,6 +63,11 @@
   </div>
 </form>
 
+<div>
+  <canvas id="chart-canvas">{{ chart }}</canvas>
+</div>
+
+
 <div class="table-container">
   <table mat-table [dataSource]="rowingSessions$ | async">
     <caption hidden>Liste aller Rudereinheiten</caption>
