@@ -3,7 +3,7 @@ package com.schoflo.kubernetesspring.exception;
 /**
  * Diese Exception wird geworfen, wenn keine Rudereinheit gefunden wurde.
  */
-public class RowingSessionNotFoundException extends RuntimeException {
+public class RowingSessionNotFoundException extends NotFoundException {
 
 
     public RowingSessionNotFoundException(String errorMessage) {

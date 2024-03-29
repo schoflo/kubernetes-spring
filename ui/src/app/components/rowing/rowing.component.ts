@@ -71,7 +71,8 @@ export class RowingComponent implements OnInit {
   createPayload(): RowingSessionModel {
     return {
       id: null,
-      workoutDate: this.form.get('workoutDate').value?.toISOString(),
+      //TODO IsoString führt dazu, dass das Datum einen Tag eher ist => OpenApi Generator anpassen
+      workoutDate: this.form.get('workoutDate').value.toISOString(),
       rowingMode: this.form.get('rowingMode').value,
       rowingInterval: this.form.get('rowingInterval').value,
       workoutTime: this.timeStringToSeconds(this.form.get('workoutTime').value),
