@@ -1,5 +1,6 @@
 package com.schoflo.kubernetesspring.entity;
 
+import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +16,14 @@ import java.util.Date;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@MappedSuperclass
 public class BaseEntity {
 
     /**
      * Datum an dem der Datensatz erstellt wurde.
      */
     @CreationTimestamp
-    private Date createdAt;
+    public Date createdAt;
     /**
      * Datum an dem der Datensatz das letzte mal geändert wurde.
      */
