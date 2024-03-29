@@ -53,7 +53,6 @@ export class RowingComponent implements OnInit {
   ngOnInit(): void {
     this.initObservables();
     this.createChart();
-    console.log(500 * (1800000 / 1000 / 7262));
   }
 
   createRowingSession() {
