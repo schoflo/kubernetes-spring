@@ -14,13 +14,14 @@ public class ExceptionHandlingController {
     @ExceptionHandler({BoardgameNotFoundException.class, RowingSessionNotFoundException.class,
             RowingIntervalNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> notFoundException(NotFoundException ex) {
+    public ResponseEntity<String> notFoundException(NotFoundException ex) {
         log.debug(ex.getMessage(), ex);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
     @ExceptionHandler(BoardgameImageCreationException.class)
-    public ResponseEntity<Object> boardgameImageCreationException(BoardgameImageCreationException ex) {
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> boardgameImageCreationException(BoardgameImageCreationException ex) {
         log.debug(ex.getMessage(), ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
