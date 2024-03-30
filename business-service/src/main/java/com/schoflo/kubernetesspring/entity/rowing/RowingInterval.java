@@ -2,6 +2,7 @@ package com.schoflo.kubernetesspring.entity.rowing;
 
 import com.schoflo.kubernetesspring.entity.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,6 +47,7 @@ public class RowingInterval extends BaseEntity {
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "rowing_interval_id")
+    @Builder.Default
     private Set<RowingSession> rowingSessions = new LinkedHashSet<>();
 
 }

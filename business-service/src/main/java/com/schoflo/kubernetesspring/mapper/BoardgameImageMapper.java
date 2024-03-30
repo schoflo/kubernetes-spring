@@ -5,10 +5,12 @@ import com.schoflo.kubernetesspring.model.BoardgameImageModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.Base64;
 
-@Mapper(componentModel = "spring")
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        componentModel = "spring")
 public abstract class BoardgameImageMapper {
 
     @Mapping(source = "boardgame.id", target = "boardgameId")

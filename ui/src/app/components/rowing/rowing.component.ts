@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  BoardgameModel,
   RowingFacadeService,
   RowingIntervalFacadeService,
   RowingIntervalModel,
@@ -56,7 +55,7 @@ export class RowingComponent implements OnInit {
   }
 
   createRowingSession() {
-    this.rowingFacadeService.createRowingSession(this.createPayload()).subscribe((session: BoardgameModel) => {
+    this.rowingFacadeService.createRowingSession(this.createPayload()).subscribe((session: RowingSessionModel) => {
       console.log(session);
       this.snackbar.open('Die Rudereinheit wurde erfolgreich angelegt!', null,
         {
@@ -71,8 +70,7 @@ export class RowingComponent implements OnInit {
   createPayload(): RowingSessionModel {
     return {
       id: null,
-      //TODO IsoString führt dazu, dass das Datum einen Tag eher ist => OpenApi Generator anpassen
-      workoutDate: this.form.get('workoutDate').value.toISOString(),
+      workoutDate: this.form.get('workoutDate').value,
       rowingMode: this.form.get('rowingMode').value,
       rowingInterval: this.form.get('rowingInterval').value,
       workoutTime: this.timeStringToSeconds(this.form.get('workoutTime').value),
@@ -87,7 +85,6 @@ export class RowingComponent implements OnInit {
   }
 
   private timeStringToSeconds(str: string): number {
-    //TODO: Prüfen, ob man das nicht besser umwandeln kann vorher schon (Pipe?)
     if (!RegExp(this.timePattern).exec(str)) {
       console.error('Stringlänge beträgt nicht 10. Gebe 0 zurück');
       return 0;
