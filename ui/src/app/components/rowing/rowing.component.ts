@@ -1,16 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {
-  RowingFacadeService,
-  RowingIntervalFacadeService,
-  RowingIntervalModel,
-  RowingSessionModel
-} from "../../../../openapi";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {RowingIntervalFacadeService, RowingIntervalModel, RowingSessionModel} from "../../../../openapi";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
-import {map, Observable} from "rxjs";
+import {BehaviorSubject, filter, map, Observable} from "rxjs";
 import {MatSelectChange} from "@angular/material/select";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableDataSource} from "@angular/material/table";
 import {Chart} from "chart.js/auto";
+import {RowingSessionService} from "../../services/rowing-session/rowing-session.service";
+import {MatSort} from "@angular/material/sort";
 import RowingModeEnum = RowingSessionModel.RowingModeEnum;
 
 
@@ -19,16 +16,19 @@ import RowingModeEnum = RowingSessionModel.RowingModeEnum;
   templateUrl: './rowing.component.html',
   styleUrls: ['./rowing.component.scss']
 })
-export class RowingComponent implements OnInit {
+export class RowingComponent implements OnInit, AfterViewInit {
 
   rowingIntervals$: Observable<RowingIntervalModel[]> = null;
-  /** Wir brauchen die MatTableDataSource, damit Sortieren und Pagination korrekt funktionieren. */
-  rowingSessions$: Observable<MatTableDataSource<RowingSessionModel>> = null;
+  rowingSessionSubject$: BehaviorSubject<RowingSessionModel[]> = null;
+
+  // *** Tabelle ***
+  @ViewChild(MatSort) sort: MatSort;
+  datasourceTable: MatTableDataSource<RowingSessionModel> = new MatTableDataSource<RowingSessionModel>();
+  displayedColumns = ['workoutDate', 'rowingMode', 'rowingInterval', 'workoutTime', 'strokes', 'distance', 'calories'];
+
 
   rowingModes: string[] = Object.values(RowingModeEnum);
   timePattern = "^([0-9]{2}):([0-5][0-9]):([0-5][0-9])$";
-
-  displayedColumns = ['workoutDate', 'rowingMode', 'rowingInterval', 'workoutTime', 'strokes', 'distance', 'calories'];
 
   public chart: Chart = null;
 
@@ -44,7 +44,7 @@ export class RowingComponent implements OnInit {
   });
 
 
-  constructor(private rowingFacadeService: RowingFacadeService,
+  constructor(private rowingSessionService: RowingSessionService,
               private rowingIntervalFacadeService: RowingIntervalFacadeService,
               private snackbar: MatSnackBar) {
   }
@@ -54,9 +54,12 @@ export class RowingComponent implements OnInit {
     this.createChart();
   }
 
+  ngAfterViewInit(): void {
+    this.initTableData();
+  }
+
   createRowingSession() {
-    this.rowingFacadeService.createRowingSession(this.createPayload()).subscribe((session: RowingSessionModel) => {
-      console.log(session);
+    this.rowingSessionService.createRowingSession(this.createPayload()).subscribe(() => {
       this.snackbar.open('Die Rudereinheit wurde erfolgreich angelegt!', null,
         {
           duration: 3000,
@@ -104,29 +107,48 @@ export class RowingComponent implements OnInit {
     }
   }
 
-  private initObservables() {
+  private initObservables(): void {
     this.rowingIntervals$ = this.rowingIntervalFacadeService.getRowingIntervals();
-    this.rowingSessions$ = this.rowingFacadeService.getRowingSessions().pipe(map((rowingSessions: RowingSessionModel[]) => {
-      return new MatTableDataSource(rowingSessions)
-    }));
+    this.rowingSessionSubject$ = this.rowingSessionService.getRowingSessions$();
+  }
+
+  private initTableData(): void {
+    this.datasourceTable.sort = this.sort;
+    this.rowingSessionSubject$.subscribe(sessions => {
+      this.datasourceTable.data = sessions;
+    });
   }
 
   private createChart() {
-    this.rowingFacadeService.getRowingSessions().subscribe(rowingSessions => {
-      this.chart = new Chart('chart-canvas', {
-        type: 'line',
-        data: {
+    this.rowingSessionService.getRowingSessions$()
+      .pipe(filter(rowingSessions => !!rowingSessions))
+      .pipe(map(rowingSessions => {
+        return {
           labels: rowingSessions.map(x => x.workoutDate),
-          datasets: [{
-            label: 'Pace',
-            data: rowingSessions.map(y => (500 * y.workoutTime / 1000 / y.distance)),
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1,
-            cubicInterpolationMode: 'monotone'
-          }]
+          data: rowingSessions.map(y => (500 * y.workoutTime / 1000 / y.distance)),
+        }
+      }))
+      .subscribe(rowingSessions => {
+        if (this.chart) {
+          this.chart.data.labels = rowingSessions.labels;
+          this.chart.data.datasets[0].data = rowingSessions.data;
+          this.chart.update();
+        } else {
+          this.chart = new Chart('chart-canvas', {
+            type: 'line',
+            data: {
+              labels: rowingSessions.labels,
+              datasets: [{
+                label: 'Pace',
+                data: rowingSessions.data,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1,
+                cubicInterpolationMode: 'monotone'
+              }]
+            }
+          });
         }
       });
-    });
   }
 }

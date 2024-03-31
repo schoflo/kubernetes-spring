@@ -69,15 +69,15 @@
 
 
 <div class="table-container">
-  <table mat-table [dataSource]="rowingSessions$ | async">
+  <table mat-table [dataSource]="datasourceTable" matSort>
     <caption hidden>Liste aller Rudereinheiten</caption>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    <!-- Spalte Datuum des Workouts -->
+    <!-- Spalte Datum des Workouts -->
     <ng-container matColumnDef="workoutDate">
-      <th mat-header-cell *matHeaderCellDef> Datum des Workouts</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Datum des Workouts</th>
       <td mat-cell *matCellDef="let element"> {{ element.workoutDate | date: "dd.MM.YYYY" }}</td>
     </ng-container>
 
@@ -100,10 +100,19 @@
     </ng-container>
 
     <!-- Spalte Ruderschläge -->
-    <mat-text-column name="strokes"></mat-text-column>
+    <ng-container matColumnDef="strokes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ruderschläge</th>
+      <td mat-cell *matCellDef="let element"> {{ element.strokes }}</td>
+    </ng-container>
     <!-- Spalte Distanz -->
-    <mat-text-column name="distance"></mat-text-column>
+    <ng-container matColumnDef="distance">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Distanz</th>
+      <td mat-cell *matCellDef="let element"> {{ element.distance }}</td>
+    </ng-container>
     <!-- Spalte Kalorien -->
-    <mat-text-column name="calories"></mat-text-column>
+    <ng-container matColumnDef="calories">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Kalorien</th>
+      <td mat-cell *matCellDef="let element"> {{ element.strokes }}</td>
+    </ng-container>
   </table>
 </div>

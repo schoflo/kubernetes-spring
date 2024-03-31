@@ -27,6 +27,7 @@ import {RowingIntervalPipe} from "./util/pipes/RowingIntervalPipe";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
 import {WorkoutTimePipe} from "./util/pipes/WorkoutTimePipe";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {WorkoutTimePipe} from "./util/pipes/WorkoutTimePipe";
     MatSnackBarModule,
     RowingIntervalPipe,
     MatTableModule,
+    MatSortModule,
     WorkoutTimePipe
   ],
   providers: [
