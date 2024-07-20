@@ -8,4 +8,5 @@ import {ROUTING_URL} from "../../util/constants/RoutingUrl";
 })
 export class HomeComponent {
   URL = ROUTING_URL;
+  protected readonly ROUTING_URL = ROUTING_URL;
 }

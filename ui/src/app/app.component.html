@@ -26,6 +26,10 @@
           <mat-icon>rowing</mat-icon>
           Rudersession erstellen
         </button>
+        <button mat-button [routerLink]="URL.WEBSOCKET_TRAINING" (click)="drawer.close()">
+          <mat-icon>send</mat-icon>
+          WebSocket Training
+        </button>
       </div>
     </mat-drawer>
 

@@ -1,4 +1,4 @@
-package com.schoflo.kubernetesspring.security;
+package com.schoflo.kubernetesspring.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

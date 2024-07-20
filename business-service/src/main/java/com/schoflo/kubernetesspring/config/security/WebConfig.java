@@ -1,4 +1,4 @@
-package com.schoflo.kubernetesspring.security;
+package com.schoflo.kubernetesspring.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
