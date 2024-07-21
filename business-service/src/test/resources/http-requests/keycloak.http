@@ -1,7 +1,7 @@
 POST http://localhost:8090/realms/SpringBootKeycloak/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id = springboot-app &
+client_id = app &
 username = user1 &
 password = 1 &
 grant_type = password
@@ -11,7 +11,7 @@ grant_type = password
 POST http://localhost:8090/realms/SpringBootKeycloak/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id = springboot-app &
+client_id = app &
 refresh_tokken = <token> &
 grant_type = refresh_token
 
