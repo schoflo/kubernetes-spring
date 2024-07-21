@@ -2,14 +2,11 @@ package com.schoflo.kubernetesspring.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-
-import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
 @EnableWebSecurity
@@ -21,20 +18,13 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
+//Als Alternative zu @PreAuthorize kann man auch hier die Endpunkte sichern
+//                        .requestMatchers("rowing/getRowingSessions")
+//                        .hasRole("user")
                         .anyRequest().permitAll());
-
         http
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(Customizer.withDefaults()));
-
-        http
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(STATELESS));
-
-        http.headers(headers -> headers
-                .frameOptions(Customizer.withDefaults())
-                .disable());
-
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
         return http.build();
     }
 
