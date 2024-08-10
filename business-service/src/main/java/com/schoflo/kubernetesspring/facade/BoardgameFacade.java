@@ -5,6 +5,7 @@ import com.schoflo.kubernetesspring.model.BoardgameModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +23,7 @@ public class BoardgameFacade {
 
 
     @GetMapping(path = "/greeting", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name) {
         return "Hello " + name;
     }
