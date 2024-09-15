@@ -51,6 +51,7 @@ export class FileUploadComponent implements ControlValueAccessor {
    * @param fn
    */
   registerOnTouched(fn: any): void {
+    // Kommentar um Sonar-Warning zu befriedigen. Grund für leere Methode steht in der JS-Doc der Methode
   }
 
   /**

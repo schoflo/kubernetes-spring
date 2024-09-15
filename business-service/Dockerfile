@@ -2,7 +2,7 @@ FROM maven:3.9.4-eclipse-temurin-17 AS maven_build
 COPY pom.xml /tmp/
 COPY src /tmp/src/
 WORKDIR /tmp/
-RUN mvn package -DskipTests
+RUN mvn clean package -DskipTests
 
 
 FROM eclipse-temurin:17-jdk-alpine

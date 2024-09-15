@@ -21,9 +21,9 @@ public class SecurityConfig {
 //Als Alternative zu @PreAuthorize kann man auch hier die Endpunkte sichern
 //                        .requestMatchers("rowing/getRowingSessions")
 //                        .hasRole("user")
-
-//                        .anyRequest().permitAll());
-                        .anyRequest().authenticated());
+                        .requestMatchers("/openapi/**").permitAll()
+                        .anyRequest().permitAll());
+//                        .anyRequest().authenticated());
         http
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));

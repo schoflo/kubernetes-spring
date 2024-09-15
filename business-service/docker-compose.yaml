@@ -1,0 +1,25 @@
+services:
+  kubernetes-spring:
+    image: 'schoflo/kubernetes-spring:latest'
+    build:
+      context: .
+    container_name: kubernetes-spring
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/spring
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=spring
+    ports:
+      - "8070:5432"

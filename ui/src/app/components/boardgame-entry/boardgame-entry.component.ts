@@ -38,7 +38,7 @@ export class BoardgameEntryComponent {
   createPayload(): BoardgameModel {
     return {
       id: null,
-      name: this.form.get('name')!.value,
+      name: this.form.get('name').value,
       publisher: this.form.get('publisher').value,
       description: this.form.get('description').value,
       price: this.form.get('price').value,
