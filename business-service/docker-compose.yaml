@@ -1,6 +1,18 @@
 services:
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=spring
+    ports:
+      - "8070:5432"
+
+
   kubernetes-spring:
     image: 'schoflo/kubernetes-spring:latest'
+    #    image: kubernetes-spring
     build:
       context: .
     container_name: kubernetes-spring
@@ -14,12 +26,14 @@ services:
     ports:
       - "8080:8080"
 
-  db:
-    image: postgres:latest
-    container_name: postgres-db
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=spring
+
+  ui:
+    #    image: 'schoflo/ui-angular:latest'
+    image: ui-angular
+    container_name: ui-angular
+    build:
+      context: .
     ports:
-      - "8070:5432"
+      - "4200:80"
+    depends_on:
+      - kubernetes-spring

@@ -1,0 +1,76 @@
+networks:
+  proxy:
+    external: true
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=spring
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "8070:5432"
+
+
+  kubernetes-spring:
+    image: 'schoflo/kubernetes-spring:latest'
+    build:
+      context: .
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+    container_name: kubernetes-spring
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/spring
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+
+
+  ui:
+    image: 'schoflo/ui-angular:latest'
+    build:
+      context: .
+    container_name: ui-angular
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    depends_on:
+      - kubernetes-spring
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ui-angular.entrypoints=http"
+      - "traefik.http.routers.ui-angular.rule=Host(`ui-angular.schoflo.de`)"
+      - "traefik.http.middlewares.ui-angular-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.ui-angular.middlewares=ui-angular-https-redirect"
+      - "traefik.http.routers.ui-angular-secure.entrypoints=https"
+      - "traefik.http.routers.ui-angular-secure.rule=Host(`ui-angular.schoflo.de`)"
+      - "traefik.http.routers.ui-angular-secure.tls=true"
+      - "traefik.http.routers.ui-angular-secure.tls.certresolver=http"
+      - "traefik.http.routers.ui-angular-secure.service=ui-angular"
+      - "traefik.http.services.ui-angular.loadbalancer.server.port=80"
+      - "traefik.docker.network=proxy"
+    ports:
+      - "4200:80"

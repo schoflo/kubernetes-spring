@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "generate_api": "openapi-generator-cli generate -i http://localhost:8080/openapi/api-docs -g typescript-angular -o openapi/ --type-mappings=date=Date",
+    "generate_api_docker": "openapi-generator-cli generate -i http://localhost:8080/openapi/api-docs -g typescript-angular -o openapi/ --type-mappings=date=Date --additional-properties=basePath=https://kubernetes-spring.schoflo.de",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
