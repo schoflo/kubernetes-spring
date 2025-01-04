@@ -6,6 +6,17 @@ spring:
         jwt:
           issuer-uri: http://localhost:8090/realms/SpringBootKeycloak
           jwk-set-uri: http://localhost:8090/realms/SpringBootKeycloak/protocol/openid-connect/certs
+      client:
+        registration:
+          keycloak:
+            client-id: app
+            client-secret: 5uw6nSWtwD9IWhB1kJvmh8PFf903QCza
+            scope: openid,profile,email
+            redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8090/realms/SpringBootKeycloak
   #  h2:
   #    console:
   #      enabled: true
@@ -25,3 +36,8 @@ spring:
     username: admin
     password: admin
     driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG

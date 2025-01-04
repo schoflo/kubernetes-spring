@@ -1,5 +1,10 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {RowingIntervalFacadeService, RowingIntervalModel, RowingSessionModel} from "../../../../openapi";
+import {
+  RowingFacadeService,
+  RowingIntervalFacadeService,
+  RowingIntervalModel,
+  RowingSessionModel
+} from "../../../../openapi";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {BehaviorSubject, filter, map, Observable} from "rxjs";
 import {MatSelectChange} from "@angular/material/select";
@@ -8,6 +13,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Chart} from "chart.js/auto";
 import {RowingSessionService} from "../../services/rowing-session/rowing-session.service";
 import {MatSort} from "@angular/material/sort";
+import {HttpClient} from "@angular/common/http";
 import RowingModeEnum = RowingSessionModel.RowingModeEnum;
 
 
@@ -46,6 +52,8 @@ export class RowingComponent implements OnInit, AfterViewInit {
 
   constructor(private rowingSessionService: RowingSessionService,
               private rowingIntervalFacadeService: RowingIntervalFacadeService,
+              private rowingFacadeService: RowingFacadeService,
+              private httpClient: HttpClient,
               private snackbar: MatSnackBar) {
   }
 
@@ -150,5 +158,9 @@ export class RowingComponent implements OnInit, AfterViewInit {
           });
         }
       });
+  }
+
+  testApi() {
+    this.rowingFacadeService.getRowingSessions().subscribe(console.log);
   }
 }

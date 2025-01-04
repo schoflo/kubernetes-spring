@@ -1,3 +1,11 @@
+# *********** Spring ************
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8090/realms/SpringBootKeycloak
+          jwk-set-uri: http://localhost:8090/realms/SpringBootKeycloak/protocol/openid-connect/certs
 # **** OpenAPI-Schnittstelle ****
 springdoc:
   api-docs:
