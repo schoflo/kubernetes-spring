@@ -1,0 +1,29 @@
+<div class="mainContainer">
+  <div *ngFor="let row of gameField; index as rowIndex" class="rowContainer">
+    <app-pin *ngFor="let col of row; index as colIndex" [pinState]="gameField[rowIndex][colIndex]"
+             (click)="changeFocus(rowIndex, colIndex)"></app-pin>
+    <app-solution [solution]=solutions[rowIndex]></app-solution>
+    <button mat-stroked-button (click)="checkRow(rowIndex)" [disabled]="checkDisabled(rowIndex)">Check</button>
+  </div>
+</div>
+
+<div class="colorContainer">
+  <app-pin [pinState]="coloredPinState(PinColor.RED)" (click)="applyPin(PinColor.RED)"></app-pin>
+  <app-pin [pinState]="coloredPinState(PinColor.BLUE)" (click)="applyPin(PinColor.BLUE)"></app-pin>
+  <app-pin [pinState]="coloredPinState(PinColor.GREEN)" (click)="applyPin(PinColor.GREEN)"></app-pin>
+  <app-pin [pinState]="coloredPinState(PinColor.YELLOW)" (click)="applyPin(PinColor.YELLOW)"></app-pin>
+  <app-pin [pinState]="coloredPinState(PinColor.ORANGE)" (click)="applyPin(PinColor.ORANGE)"></app-pin>
+  <app-pin [pinState]="coloredPinState(PinColor.PURPLE)" (click)="applyPin(PinColor.PURPLE)"></app-pin>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 30px;">
+  <p>Code zu prüfen</p>
+  <!--  <div class="colorContainer">-->
+  <!--    <app-pin *ngFor="let color of codeToSolve" [pinState]="coloredPinState(color)"></app-pin>-->
+  <!--  </div>-->
+  <p *ngIf="gameWon">Gewonnen!</p>
+  <button mat-stroked-button *ngIf="gameWon" (click)="initNewGame()">Neues Spiel</button>
+</div>
+
+
+

@@ -28,6 +28,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatTableModule} from "@angular/material/table";
 import {WorkoutTimePipe} from "./util/pipes/WorkoutTimePipe";
 import {MatSortModule} from "@angular/material/sort";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MatSortModule} from "@angular/material/sort";
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    DragDropModule,
     MatInputModule,
     MatSidenavModule,
     MatButtonModule,
